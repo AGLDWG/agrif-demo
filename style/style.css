@@ -1,0 +1,88 @@
+html {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    width: 900px;
+}
+
+button {
+    background: #005b9c;
+    background-image: -webkit-linear-gradient(top, #005b9c, #2980b9);
+    background-image: -moz-linear-gradient(top, #005b9c, #2980b9);
+    background-image: -ms-linear-gradient(top, #005b9c, #2980b9);
+    background-image: -o-linear-gradient(top, #005b9c, #2980b9);
+    background-image: linear-gradient(to bottom, #005b9c, #2980b9);
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    border: solid #1f628d 1px;
+    text-decoration: none;
+    margin: 3px;
+
+    width: 400px;
+}
+
+button:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tick-dp,
+#tick-goa {
+    display: none;
+    font-size: 23px;
+    color: red;
+}
+
+#trips-dp,
+#trips-goa {
+    width: 800px;
+    height: 400px;
+}
+
+#combine-result {
+    color: red;
+}
+
+.qbox {
+    width: 100%;
+    height: 100px;
+    border: none;
+}
+
+#query-artefacts-tbox {
+    height: 160px;
+}
+
+.results {
+    display: none;
+}
+
+
+#trips-dp,
+#trips-goa,
+#results-load-dp,
+#results-load-goa,
+#combined-blurb,
+#results-ancestors,
+#results-artefacts,
+#results-archives {
+    display: none;
+}
+
+#ancestors,
+#artefacts,
+#archives {
+    font-family: "Courier New", serif;
+    font-size: small;
+}

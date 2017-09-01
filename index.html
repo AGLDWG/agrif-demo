@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AGRIF Demo</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script data-main="scripts/main" src="scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <h1>AGRIF Demo</h1>
+    <h2>Introduction</h2>
+    <p>This web page contains some examples of queries that are facilitated by a particular kind of data model, an <a href="https://www.w3.org/TR/owl2-overview/">OWL</a> ontology. Simple <a href="https://www.w3.org/wiki/LinkedData">Linked Data</a> mechanisms are used to get data and then <a href="https://www.w3.org/TR/sparql11-query/">SPARQL</a> queries are run against it.</p>
+    <p>The functions here demo some elements of the <a href="http://reference.data.gov.au/def/ont/agrif">AGRIF Ontology</a>. The data used here is the "policy creation 2" example data from the ontology's documentation code repository online at <a href="https://github.com/AGLDWG/agrif-ont/tree/master/examples">https://github.com/AGLDWG/agrif-ont/tree/master/examples</a>. A diagram of the data used here is shown in Figure 1 below.</p>
+    <p>
+        <img src="style/policy-creation-2.png" width="900" alt="policy creation 2 data diagram" /><br />
+        <span style="font-size: small;"><strong>Figure 1</strong>: An OWL diagram of the example data used for this demonstration. All classes and properties are defined in the AGRIF ontology</span>
+    </p>
+
+
+    <h2>1. Load data from remote sources</h2>
+    <p>We load the data that will make Figure 1 from two remote sources (two RDF files in GitHub) that emulate data being published by two different government agencies, the fictional Department of Planning and the Government Orchestration Office</p>
+    <button id="load-dp">Load Dept. of Planning Data</button><span id="tick-dp">&#10003;</span><br />
+    <div class="results" id="results-load-dp">
+        <textarea id="trips-dp"></textarea><br />
+        <p>Data from <a href="https://raw.githubusercontent.com/AGLDWG/agrif-ont/master/examples/policy-creation-2-dp.ttl">https://raw.githubusercontent.com/AGLDWG/agrif-ont/master/examples/policy-creation-2-dp.ttl</a></p>
+    </div>
+    <button id="load-goa">Load Government Orchestration Office Data</button><span id="tick-goa">&#10003;</span><br />
+    <div class="results" id="results-load-goa">
+        <textarea id="trips-goa"></textarea><br />
+        <p>Data from <a href="https://raw.githubusercontent.com/AGLDWG/agrif-ont/master/examples/policy-creation-2-dp.ttl">https://raw.githubusercontent.com/AGLDWG/agrif-ont/master/examples/policy-creation-2-goa.ttl</a></p>
+    </div>
+    <ul><li><em>Loading RDF data from uncoordinated disparate sources is possible as Linked Data protocols are used to define where data is and how it is structured.</em></li></ul>
+
+
+    <h2>2. Combine Data</h2>
+    <p>We now combine the data from the two agencies into a single graph on which we will run a series of queries.</p>
+    <button id="combine">Combine Data</button><br />
+    <div class="results" id="results-combine">
+        <p>Triples parsed from files and loaded into a graph store: <span id="combine-result">0</span></p>
+        <ul><li>
+            <em>The data from the two data sources is able to be combined into a since information graph due to the following reasons:</em>
+            <ul>
+                <li><em>The same information model (AGRIF) is used</em></li>
+                <li><em>Commensurate (not necessarily the same) data formats (RDF)</em></li>
+                <li><em>Shared identifiers for some Named Individuals (publicly known <a href="https://www.w3.org/TR/prov-o/#Organization">Organisation</a>s, exchanged <a href="http://reference.data.gov.au/def/ont/agrif#Record">Record</a>s)</em></li>
+            </ul>
+        </li></ul>
+    </div>
+
+    <h2>3. Queries</h2>
+    <h3>3.1 Get all the ancestors of a Record</h3>
+    <p>Here we wish to find all the ancestors from which Record "Policy and Procedure Policy 2017 Final" was derived. We run a <em>path following</em> SPARQL query against the information graph in order to find ancestors at any number of steps from the target Record:</p>
+    <textarea class="qbox" id="query-ancestors-tbox"></textarea>
+    <button id="query-ancestors">Find Ancestors</button><br />
+    <div class="results" id="results-ancestors">
+        <h4>Ancestors</h4>
+        <p id="ancestors"></p>
+        <ul><li><em>The Records here are all those that are linked to the target Record via any number of agrif:relatedTo properties along a "property path".</em></li></ul>
+    </div>
+
+    <h3>3.2 Get all the Artefacts that are stored incorrectly according to their Record's Disposal Class</h3>
+    <p>We wish to check that all the Artefacts in the graph are stored according to the <a href="http://reference.data.gov.au/def/ont/agrif#DisposalClass">Disposal Class</a> of their associated Record. In this example, Records incicated as needing their Artefacts "Retained As National Archives" must have Artefacts stored within the "NAA Vault" System.</p>
+    <textarea class="qbox" id="query-artefacts-tbox"></textarea>
+    <button id="query-artefacts">Find Artefacts</button><br />
+    <div class="results" id="results-artefacts">
+        <h4>Artefacts</h4>
+        <p id="artefacts"></p>
+        <ul><li><em>The Artefact retrieved here is stored in an agency's SharePoint system which it should have been archived in the National Archives given it's associated Record's Disposal Class is "Retain as National Archives"</em></li></ul>
+    </div>
+
+    <h3>3.3 Get all Records for which there are Artefacts in the NAA Vault System</h3>
+    <p>If we wanted to understand what information, conceptually, was stored in a particular system, we could look at all the Artefacts in that system and relate them to their associated Record. Here we query the NAA's "Vault" to see what Records are associated with Artefacts stored there.</p>
+    <textarea class="qbox" id="query-archives-tbox"></textarea>
+    <button id="query-archives">Find Records</button><br />
+    <div class="results" id="results-archives">
+        <h4>Records</h4>
+        <p id="archives"></p>
+        <ul><li><em>Even though there are multiple Artefacts for some Records, the query here returns only the distinct Records. In a larger example we could list Records, information about which may be retained in home organisations and yet Artefacts for which have been sent to the National Archives.</em></li></ul>
+    </div>
+
+    <h2>Further information</h2>
+    <p>Please refere to the <a href="http://reference.data.gov.au/def/ont/agrif">AGRIF ontology</a> and its documentation for further examples and author contact information.</p>
+    <script src="scripts/rdfstore_min.js"></script>
+    <script src="scripts/demo.js"></script>
+</body>
+</html>
