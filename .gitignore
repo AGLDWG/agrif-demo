@@ -1,1 +1,5 @@
-# Created by .ignore support plugin (hsz.mobi)
+# WebStorm
+.idea/
+
+# Mac
+.DS_Store
