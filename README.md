@@ -1,7 +1,7 @@
 # AGRIF Demo
-This repo contains a single HTML page which is used to retrieve example data made to demonstrate features of the [AGRIF ontology](http://reference.data.gov.au/def/ont/agrif).
+This repo contains a single HTML page which is used to retrieve example data made to demonstrate features of the [AGRIF ontology](http://linked.data.gov.au/def/agrif).
 
-The demo can be seen online at <http://reference.data.gov.au/agrifdemo>.
+The demo can be seen online at <http://www.linked.data.gov.au/agrifdemo>.
 
 The software tools used for this demo are:
 
