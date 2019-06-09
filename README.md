@@ -15,7 +15,7 @@ For further information, please contact:
 *Author*:  
 
 **Nicholas Car**  
-*Data Architect*  
-Geoscience Australia  
-nicholas.car@ga.gov.au  
+*Senior Experimental Scientist*  
+CSIRO, Environmental Informatics Group  
+nicholas.car@csiro.au  
 <http://orcid.org/0000-0002-8742-7730>
