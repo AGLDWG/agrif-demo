@@ -9,6 +9,9 @@ The software tools used for this demo are:
 * [JQuery](https://jquery.com/) JavaScript framework
 * [rdfstore](https://github.com/antoniogarrote/rdfstore-js) Javascript framework
 
+## License
+The content of this repository is licensed for use using Creative Commons BY 4.0. See the [LICENSE](LICENSE) file for the deed.
+
 ## Contact
 For further information, please contact:
 
